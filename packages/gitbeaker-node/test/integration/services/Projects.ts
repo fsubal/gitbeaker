@@ -41,6 +41,9 @@ describe('Projects.upload', () => {
   it('should upload a text file', async () => {
     try {
       const project = await service.create({ name: 'Project Upload Integration Test Text File' });
+
+      console.log(`Created${project.id}`);
+
       const results = await service.upload(project.id as number, 'TESTING FILE UPLOAD :D', {
         metadata: {
           filename: 'testfile.txt',
@@ -48,12 +51,12 @@ describe('Projects.upload', () => {
         },
       });
 
+      console.log('uploaded DONE');
       expect(results).toContainKeys(['alt', 'url', 'markdown']);
     } catch (e) {
       console.log(e);
       console.log(e.response);
       console.log('------------------');
-      console.log(await e.response.text());
     }
   });
 });
