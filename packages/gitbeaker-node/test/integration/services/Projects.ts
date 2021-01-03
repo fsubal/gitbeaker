@@ -52,6 +52,8 @@ describe('Projects.upload', () => {
     } catch (e) {
       console.log(e);
       console.log(e.response);
+      console.log('------------------');
+      console.log(await e.response.text());
     }
   });
 });
