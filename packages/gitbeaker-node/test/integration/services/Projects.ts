@@ -51,6 +51,7 @@ describe('Projects.upload', () => {
       expect(results).toContainKeys(['alt', 'url', 'markdown']);
     } catch (e) {
       console.log(e);
+      console.log(e.response);
     }
   });
 });
