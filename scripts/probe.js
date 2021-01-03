@@ -20,7 +20,7 @@ async function run() {
 
   await sleep(170000);
 
-  while (attempt < 10) {
+  while (attempt < 20) {
     try {
       const ready = await checkReadiness();
 
