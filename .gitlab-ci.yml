@@ -101,9 +101,11 @@ test:unit:utils:
   after_script:
     - docker cp gitlab:/var/log/gitlab runner_logs
     - touch fake.txt
+    - ls
+    - ls runner_logs
   artifacts:
+    when: on_failure
     paths:
-      - fake.txt
       - runner_logs
 
 test:integration:browser:
