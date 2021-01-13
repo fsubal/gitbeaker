@@ -99,10 +99,11 @@ test:unit:utils:
 
     - cd ..
   after_script:
-    - docker cp gitlab:/var/log/gitlab runner_logs/
-
+    - docker cp gitlab:/var/log/gitlab runner_logs
+    - touch fake.txt
   artifacts:
     paths:
+      - fake.txt
       - runner_logs
 
 test:integration:browser:
