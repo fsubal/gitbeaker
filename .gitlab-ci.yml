@@ -100,9 +100,7 @@ test:unit:utils:
     - cd ..
   after_script:
     - docker cp gitlab:/var/log/gitlab runner_logs
-    - touch fake.txt
-    - ls
-    - ls runner_logs
+    - echo $(docker exec -i gitlab sh -c "grep -v -e '^#' -e '^$' /etc/gitlab/gitlab.rb") > runner_logs/gitlab.rb
   artifacts:
     when: on_failure
     paths:
