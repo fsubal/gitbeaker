@@ -39,9 +39,31 @@ export interface CommitSchemaCamelized {
 
 export type CommitSchema = CommitSchemaDefault | CommitSchemaCamelized;
 
-export interface CommitAction {
+export interface Create {
   /** The action to perform */
-  action: 'create' | 'delete' | 'move' | 'update';
+  action: 'create';
+  /** Full path to the file. Ex. lib/class.rb */
+  filePath: string;
+  /** File content, required for all except delete. Optional for move */
+  content: string;
+  /** text or base64. text is default. */
+  encoding?: string;
+}
+
+export interface Delete {
+  /** The action to perform */
+  action: 'delete';
+  /** Full path to the file. Ex. lib/class.rb */
+  filePath: string;
+  /** text or base64. text is default. */
+  encoding?: string;
+  /** Last known file commit id. Will be only considered in update, move and delete actions. */
+  lastCommitId?: string;
+}
+
+export interface Move {
+  /** The action to perform */
+  action: 'move';
   /** Full path to the file. Ex. lib/class.rb */
   filePath: string;
   /** Original full path to the file being moved.Ex.lib / class1.rb */
@@ -53,6 +75,21 @@ export interface CommitAction {
   /** Last known file commit id. Will be only considered in update, move and delete actions. */
   lastCommitId?: string;
 }
+
+export interface Update {
+  /** The action to perform */
+  action: 'update';
+  /** Full path to the file. Ex. lib/class.rb */
+  filePath: string;
+  /** File content, required for all except delete. Optional for move */
+  content: string;
+  /** text or base64. text is default. */
+  encoding?: string;
+  /** Last known file commit id. Will be only considered in update, move and delete actions. */
+  lastCommitId?: string;
+}
+
+export type CommitAction = Create | Delete | Move | Update;
 
 export interface GPGSignature {
   signature_type: 'PGP';
